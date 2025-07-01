@@ -44,7 +44,7 @@ export default function Home() {
             “Sometimes the most powerful journey is the one back to yourself — therapy helps guide the way.”
           </h1>
           <h3 className="text-center text-lg sm:text-xl md:text-2xl pt-5 max-w-4xl">
-            Life's challenges—whether they show up as anxiety, unresolved trauma, relationship conflict, or loss—can feel heavy to hold on your own...
+            Life&apos;s challenges—whether they show up as anxiety, unresolved trauma, relationship conflict, or loss—can feel heavy to hold on your own...
           </h3>
         </div>
 
@@ -68,7 +68,7 @@ export default function Home() {
         <div className="thaughts flex flex-col justify-center items-center py-16 sm:py-20 fade-in px-4">
           <Image width={700} height={700} src="/hero1.jpg" alt="hero" className="relative object-cover opacity-50"/>
           <h1 className="text-2xl absolute sm:text-4xl px-10 md:px-0 brightness-50 md:text-5xl lg:text-6xl drop-shadow-md text-center max-w-5xl">
-            “Our sessions aren't about fixing you — they're about helping you reconnect with parts of yourself that may have been silenced or hidden.”
+            “Our sessions aren&apos;t about fixing you — they&apos;re about helping you reconnect with parts of yourself that may have been silenced or hidden.”
           </h1>
         </div>
 
