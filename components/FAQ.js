@@ -53,7 +53,7 @@ function Question({ question, answer }) {
         onClick={() => setisopen(!isopen)}
       >
         <span className="font-semibold">{question}</span>
-        <span>{isopen ? "-" : "+"}</span>
+        <span className='text-3xl'>{isopen ? "-" : "+"}</span>
       </button>
       {isopen && <p className="mt-2 text-gray-600">{answer}</p>}
     </div>
