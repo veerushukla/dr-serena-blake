@@ -23,13 +23,15 @@ export default function Home() {
     <main className="bg-gray-100">
       <Navbar />
       <div className="heading flex items-center gap-4 pt-4 sm:pt-8 px-4 sm:px-8 fade-in max-w-screen-xl mx-auto">
-        <Image width={40} height={40}
+        <a href="#Hero">
+          <Image width={40} height={40}
           src="/logo.png"
           alt="logo"
           className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
         />
+        </a>
         <h1 className={`${robotoSlab.className} text-base sm:text-lg md:text-2xl font-medium leading-tight text-gray-600`}>
-          Dr. Serena Blake,<br className="hidden sm:block" /> PsyD (Clinical Psychologist)
+          <a href="#Hero">Dr. Serena Blake,<br className="hidden sm:block" /> PsyD (Clinical Psychologist)</a>
         </h1>
       </div>
 
