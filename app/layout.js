@@ -2,7 +2,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import FadeInSection from "@/components/FadeInSection";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +25,6 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased scroll-animate`}
       >
         {children}
-        <FadeInSection />
         <SpeedInsights />
         <Analytics />
       </body>

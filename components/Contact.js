@@ -2,6 +2,8 @@
 import React, { useState, useRef } from "react";
 import { Roboto_Slab } from "next/font/google";
 import Head from "next/head";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const robotoSlab = Roboto_Slab({
   subsets: ["latin"],
@@ -25,40 +27,79 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const formRef = useRef(null);
 
+  const validateField = (name, value) => {
+    switch (name) {
+      case "name":
+        return value.trim() ? "" : "Name is required.";
+      case "phone":
+        return value.trim() ? "" : "Phone is required.";
+      case "email":
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+          ? ""
+          : "Please enter a valid email address.";
+      case "preferredDate":
+        return value ? "" : "Preferred date is required.";
+      case "preferredTime":
+        return value ? "" : "Preferred time is required.";
+      case "message":
+        return value.trim() ? "" : "Please enter your message.";
+      case "referral":
+        return value.trim() ? "" : "Let us know how you found us.";
+      case "agreement":
+        return value ? "" : "You must accept the terms.";
+      default:
+        return "";
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
+    const fieldValue = type === "checkbox" ? checked : value;
+
+    setFormData((prev) => ({ ...prev, [name]: fieldValue }));
+
+    // Validate as user types (optional for some fields)
+    if (name === "email") {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: validateField(name, fieldValue),
+      }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value, type, checked } = e.target;
+    const fieldValue = type === "checkbox" ? checked : value;
+
+    setErrors((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: validateField(name, fieldValue),
     }));
   };
 
-  const validate = () => {
+  const validateAll = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required.";
-    if (!formData.phone.trim()) newErrors.phone = "Phone is required.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address.";
-    }
-    if (!formData.preferredDate) newErrors.preferredDate = "Preferred date is required.";
-    if (!formData.preferredTime) newErrors.preferredTime = "Preferred time is required.";
-    if (!formData.message.trim()) newErrors.message = "Please enter your message.";
-    if (!formData.referral.trim()) newErrors.referral = "Let us know how you found us.";
-    if (!formData.agreement) newErrors.agreement = "You must accept the terms.";
+    Object.entries(formData).forEach(([key, value]) => {
+      const error = validateField(key, value);
+      if (error) newErrors[key] = error;
+    });
     return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newErrors = validate();
+    const newErrors = validateAll();
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       setSubmitted(true);
       setFormData(initialForm);
       formRef.current?.reset();
+      toast.success("✅ Your message has been sent!", { icon: "📬" });
     } else {
       setSubmitted(false);
+      toast.error("❌ Please fix the errors in the form.", { icon: "⚠️" });
+
       const firstErrorKey = Object.keys(newErrors)[0];
       const errorElement = document.getElementById(firstErrorKey);
       if (errorElement) {
@@ -96,11 +137,7 @@ const Contact = () => {
               className="max-w-md mx-auto flex flex-col gap-y-4 md:px-8 px-2"
               noValidate
             >
-              {[
-                ["Name", "name"],
-                ["Phone", "phone"],
-                ["Email", "email"],
-              ].map(([label, name]) => (
+              {[["Name", "name"], ["Phone", "phone"], ["Email", "email"]].map(([label, name]) => (
                 <div key={name} className="w-full flex flex-col gap-1">
                   <label htmlFor={name}>{label}</label>
                   <input
@@ -111,6 +148,7 @@ const Contact = () => {
                     placeholder={`Your ${label}`}
                     value={formData[name]}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     aria-invalid={!!errors[name]}
                     className={`p-3 border ${errors[name] ? "border-red-500" : "border-gray-300"} rounded-md`}
                     required
@@ -118,6 +156,7 @@ const Contact = () => {
                   {errors[name] && <span className="text-red-500 text-sm">{errors[name]}</span>}
                 </div>
               ))}
+
               <div className="w-full flex flex-col gap-1">
                 <label htmlFor="preferredDate">Preferred Date and Time</label>
                 <div className="flex flex-col md:flex-row gap-2">
@@ -127,7 +166,7 @@ const Contact = () => {
                     type="date"
                     value={formData.preferredDate}
                     onChange={handleChange}
-                    aria-invalid={!!errors.preferredDate}
+                    onBlur={handleBlur}
                     className={`w-full p-3 border ${errors.preferredDate ? "border-red-500" : "border-gray-300"} rounded-md`}
                     required
                   />
@@ -137,7 +176,7 @@ const Contact = () => {
                     type="time"
                     value={formData.preferredTime}
                     onChange={handleChange}
-                    aria-invalid={!!errors.preferredTime}
+                    onBlur={handleBlur}
                     className={`w-full p-3 border ${errors.preferredTime ? "border-red-500" : "border-gray-300"} rounded-md`}
                     required
                   />
@@ -154,7 +193,7 @@ const Contact = () => {
                   placeholder="Your Message"
                   value={formData.message}
                   onChange={handleChange}
-                  aria-invalid={!!errors.message}
+                  onBlur={handleBlur}
                   className={`p-3 border ${errors.message ? "border-red-500" : "border-gray-300"} rounded-md h-20`}
                   required
                 />
@@ -169,7 +208,7 @@ const Contact = () => {
                   placeholder="What brings you here?"
                   value={formData.referral}
                   onChange={handleChange}
-                  aria-invalid={!!errors.referral}
+                  onBlur={handleBlur}
                   className={`p-3 border ${errors.referral ? "border-red-500" : "border-gray-300"} rounded-md h-20`}
                   required
                 />
@@ -183,6 +222,7 @@ const Contact = () => {
                   name="agreement"
                   checked={formData.agreement}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   className="h-5 w-5 text-blue-600 rounded mt-1"
                   required
                 />
@@ -199,15 +239,18 @@ const Contact = () => {
               >
                 Send Message
               </button>
-
-              {submitted && (
-                <p className="text-green-600 text-center mt-4">
-                  ✅ Thank you! Dr. Serena Blake will contact you shortly.
-                </p>
-              )}
             </form>
           </div>
         </div>
+
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          theme="light"
+          toastClassName="!rounded-xl !shadow-lg !text-sm !text-gray-700 !bg-white border border-emerald-200"
+          bodyClassName="!p-4"
+          closeButton={false}
+        />
       </div>
     </>
   );
