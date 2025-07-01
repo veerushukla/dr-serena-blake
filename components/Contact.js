@@ -21,6 +21,7 @@ const Contact = () => {
 
   const [formData, setFormData] = useState(initialForm);
   const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
   const formRef = useRef(null);
 
   const handleChange = (e) => {
@@ -35,7 +36,9 @@ const Contact = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Name is required.";
     if (!formData.phone.trim()) newErrors.phone = "Phone is required.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) { newErrors.email = "Please enter a valid email address."; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
     if (!formData.preferredDate) newErrors.preferredDate = "Preferred date is required.";
     if (!formData.preferredTime) newErrors.preferredTime = "Preferred time is required.";
     if (!formData.message.trim()) newErrors.message = "Please enter your message.";
@@ -50,10 +53,11 @@ const Contact = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      alert("Form submitted successfully!");
+      setSubmitted(true);
       setFormData(initialForm);
       formRef.current?.reset();
     } else {
+      setSubmitted(false);
       const firstErrorKey = Object.keys(newErrors)[0];
       const errorElement = document.getElementById(firstErrorKey);
       if (errorElement) {
@@ -74,22 +78,13 @@ const Contact = () => {
         <div className="info-cards order-2 lg:order-1">
           <div className="flex flex-col items-center justify-center gap-4">
             <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-              <div className="flex flex-col gap-4">
-                <div>
-                  <h3 className="font-semibold text-gray-800 underline">Our Office</h3>
-                  <p>1287 Maplewood Drive, Los Angeles, CA 90026</p>
-                </div>
-              </div>
+              <h3 className="font-semibold text-gray-800 underline">Our Office</h3>
+              <p>1287 Maplewood Drive, Los Angeles, CA 90026</p>
             </div>
-
             <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-              <div className="flex flex-col gap-4">
-                <div>
-                  <h3 className="font-semibold text-gray-800 underline">Hours</h3>
-                  <p>In-person: Tue & Thu, 10 AM—6 PM</p>
-                  <p>Virtual via Zoom: Mon, Wed & Fri, 1 PM—5 PM</p>
-                </div>
-              </div>
+              <h3 className="font-semibold text-gray-800 underline">Hours</h3>
+              <p>In-person: Tue & Thu, 10 AM—6 PM</p>
+              <p>Virtual via Zoom: Mon, Wed & Fri, 1 PM—5 PM</p>
             </div>
           </div>
         </div>
@@ -107,7 +102,12 @@ const Contact = () => {
             className="max-w-md mx-auto flex flex-col gap-y-4 md:px-8 px-2"
             noValidate
           >
-            {[["Name", "name"], ["Phone", "phone"], ["Email", "email"]].map(([label, name]) => (
+            {/* Name, Phone, Email */}
+            {[
+              ["Name", "name"],
+              ["Phone", "phone"],
+              ["Email", "email"],
+            ].map(([label, name]) => (
               <div key={name} className="w-full flex flex-col gap-1">
                 <label htmlFor={name}>{label}</label>
                 <input
@@ -118,6 +118,7 @@ const Contact = () => {
                   placeholder={`Your ${label}`}
                   value={formData[name]}
                   onChange={handleChange}
+                  aria-invalid={!!errors[name]}
                   className={`p-3 border ${errors[name] ? "border-red-500" : "border-gray-300"} rounded-md`}
                   required
                 />
@@ -135,6 +136,7 @@ const Contact = () => {
                   type="date"
                   value={formData.preferredDate}
                   onChange={handleChange}
+                  aria-invalid={!!errors.preferredDate}
                   className={`w-full p-3 border ${errors.preferredDate ? "border-red-500" : "border-gray-300"} rounded-md`}
                   required
                 />
@@ -144,16 +146,13 @@ const Contact = () => {
                   type="time"
                   value={formData.preferredTime}
                   onChange={handleChange}
+                  aria-invalid={!!errors.preferredTime}
                   className={`w-full p-3 border ${errors.preferredTime ? "border-red-500" : "border-gray-300"} rounded-md`}
                   required
                 />
               </div>
-              {(errors.preferredDate || errors.preferredTime) && (
-                <span className="text-red-500 text-sm">
-                  {errors.preferredDate && <span className="text-red-500 text-sm">{errors.preferredDate}</span>}
-                  {errors.preferredTime && <span className="text-red-500 text-sm">{errors.preferredTime}</span>}
-                </span>
-              )}
+              {errors.preferredDate && <span className="text-red-500 text-sm">{errors.preferredDate}</span>}
+              {errors.preferredTime && <span className="text-red-500 text-sm">{errors.preferredTime}</span>}
             </div>
 
             {/* Message */}
@@ -163,9 +162,10 @@ const Contact = () => {
                 id="message"
                 name="message"
                 placeholder="Your Message"
-                className={`p-3 border ${errors.message ? "border-red-500" : "border-gray-300"} rounded-md h-20`}
                 value={formData.message}
                 onChange={handleChange}
+                aria-invalid={!!errors.message}
+                className={`p-3 border ${errors.message ? "border-red-500" : "border-gray-300"} rounded-md h-20`}
                 required
               />
               {errors.message && <span className="text-red-500 text-sm">{errors.message}</span>}
@@ -178,9 +178,10 @@ const Contact = () => {
                 id="referral"
                 name="referral"
                 placeholder="What brings you here?"
-                className={`p-3 border ${errors.referral ? "border-red-500" : "border-gray-300"} rounded-md h-20`}
                 value={formData.referral}
                 onChange={handleChange}
+                aria-invalid={!!errors.referral}
+                className={`p-3 border ${errors.referral ? "border-red-500" : "border-gray-300"} rounded-md h-20`}
                 required
               />
               {errors.referral && <span className="text-red-500 text-sm">{errors.referral}</span>}
@@ -203,7 +204,7 @@ const Contact = () => {
             </label>
             {errors.agreement && <span className="text-red-500 text-sm">{errors.agreement}</span>}
 
-            {/* Submit */}
+            {/* Submit Button */}
             <button
               type="submit"
               className="bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition"
@@ -211,6 +212,13 @@ const Contact = () => {
             >
               Send Message
             </button>
+
+            {/* Success Message */}
+            {submitted && (
+              <p className="text-green-600 text-center mt-4">
+                ✅ Thank you! Dr. Serena Blake will contact you shortly.
+              </p>
+            )}
           </form>
         </div>
       </div>
