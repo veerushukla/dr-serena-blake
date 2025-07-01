@@ -42,7 +42,7 @@ const Hero = () => {
           Dr. Serena Blake, PsyD — Licensed Clinical Psychologist in Los Angeles, CA
         </h2>
         <button className="mt-8 px-6 py-3 text-lg bg-white text-blue-700 font-semibold rounded-full shadow-md hover:bg-blue-100 transition">
-          Book a Free Consult
+          Schedule Your Consultation
         </button>
         <div className="count text-white mt-8 px-4 text-2xl sm:text-4xl font-bold max-w-2xl drop-shadow-md flex flex-row justify-between gap-8">
           <ul className='flex flex-col items-start'>
