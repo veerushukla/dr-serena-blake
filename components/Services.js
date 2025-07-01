@@ -36,7 +36,7 @@ const expertiseData = [
 
 const Services = () => {
   return (
-    <div id="Services" className="min-h-screen bg-orange-300 flex flex-col items-center justify-center px-4 py-12">
+    <div id="Services" className="min-h-screen bg-white shadow-lg flex flex-col items-center justify-center px-4 py-12">
       <h2 className={`${robotoSlab.className} font-bold text-3xl md:text-4xl text-gray-800 mb-10`}>Core Expertise</h2>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
@@ -50,18 +50,15 @@ const Services = () => {
         }}
         loop= {true}
         breakpoints={{
-          768: {
-            slidesPerView: 2,
-          },
           1024: {
-            slidesPerView: 3,
-          },
+            slidesPerView: 1,
+          }
         }}
         className="max-w-6xl w-full"
       >
         {expertiseData.map((item, index) => (
           <SwiperSlide key={index} className="flex items-center justify-center">
-            <div className="flex flex-col items-center justify-center mx-auto py-8 gap-y-4 w-72">
+            <div className="flex flex-col items-center justify-center mx-auto py-8 gap-y-4 w-72 lg:w-96">
               <Image
                 width={400}
                 height={400}
@@ -69,7 +66,7 @@ const Services = () => {
                 alt={item.title}
                 className="transition-transform duration-300 hover:scale-105 w-60 h-60 object-cover object-center rounded-full border-4 border-white shadow-md"
               />
-              <span className={`${robotoSlab.className} text-xl text-center`}>
+              <span className={`${robotoSlab.className} text-xl`}>
                 {item.title}
               </span>
               <p className="text-center text-sm">{item.description}</p>

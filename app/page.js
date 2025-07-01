@@ -61,6 +61,11 @@ export default function Home() {
             <li>Couples session - $240</li>
             <li>Superbills available for insurance reimbursement</li>
           </ul>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl drop-shadow-md text-center">Hours</h2>
+          <ul className="text-base sm:text-lg md:text-xl text-center text-gray-700 gap-y-4 my-6 px-4 sm:px-8">
+            <li>In-person: Tue & Thu, 10 AM—6 PM</li>
+            <li>Virtual via Zoom: Mon, Wed & Fri, 1 PM—5 PM</li>
+          </ul>
         </div>
 
         <div className="h-0.5 w-3/4 md:w-1/2 bg-black mx-auto fade-in mb-10"></div>

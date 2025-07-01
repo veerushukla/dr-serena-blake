@@ -78,28 +78,12 @@ const Contact = () => {
         />
       </Head>
 
-      <div id="Contact" className="min-h-screen flex flex-col items-center bg-emerald-200 py-12">
+      <div id="Contact" className="min-h-screen flex flex-col items-center bg-emerald-100 py-12">
         <h2 className={`${robotoSlab.className} font-bold text-3xl md:text-4xl text-gray-800 mb-10 text-center px-4`}>
           Contact Dr. Serena Blake
         </h2>
 
         <div className="cards flex lg:flex-row flex-col justify-center items-center gap-8 px-4">
-          {/* Info Cards */}
-          <div className="info-cards order-2 lg:order-1">
-            <div className="flex flex-col items-center justify-center gap-4">
-              <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-                <h3 className="font-semibold text-gray-800 underline">Our Office</h3>
-                <p>1287 Maplewood Drive, Los Angeles, CA 90026</p>
-              </div>
-              <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-                <h3 className="font-semibold text-gray-800 underline">Hours</h3>
-                <p>In-person: Tue & Thu, 10 AM—6 PM</p>
-                <p>Virtual via Zoom: Mon, Wed & Fri, 1 PM—5 PM</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
           <div className="contact-form bg-white shadow-md rounded-lg p-4 w-full max-w-md order-1 lg:order-2">
             <p className="text-sm md:text-lg text-gray-700 mb-6 text-center px-8">
               Simply fill the brief fields below and Dr. Serena Blake will be in touch with you soon.
@@ -112,7 +96,6 @@ const Contact = () => {
               className="max-w-md mx-auto flex flex-col gap-y-4 md:px-8 px-2"
               noValidate
             >
-              {/* Name, Phone, Email */}
               {[
                 ["Name", "name"],
                 ["Phone", "phone"],
@@ -135,8 +118,6 @@ const Contact = () => {
                   {errors[name] && <span className="text-red-500 text-sm">{errors[name]}</span>}
                 </div>
               ))}
-
-              {/* Date and Time */}
               <div className="w-full flex flex-col gap-1">
                 <label htmlFor="preferredDate">Preferred Date and Time</label>
                 <div className="flex flex-col md:flex-row gap-2">
@@ -165,7 +146,6 @@ const Contact = () => {
                 {errors.preferredTime && <span className="text-red-500 text-sm">{errors.preferredTime}</span>}
               </div>
 
-              {/* Message */}
               <div className="w-full flex flex-col gap-1">
                 <label htmlFor="message">Message</label>
                 <textarea
@@ -181,7 +161,6 @@ const Contact = () => {
                 {errors.message && <span className="text-red-500 text-sm">{errors.message}</span>}
               </div>
 
-              {/* Referral */}
               <div className="w-full flex flex-col gap-1">
                 <label htmlFor="referral">Where did you find us?</label>
                 <textarea
@@ -197,7 +176,6 @@ const Contact = () => {
                 {errors.referral && <span className="text-red-500 text-sm">{errors.referral}</span>}
               </div>
 
-              {/* Agreement */}
               <label htmlFor="agreement" className="flex items-start gap-2">
                 <input
                   type="checkbox"
@@ -214,16 +192,14 @@ const Contact = () => {
               </label>
               {errors.agreement && <span className="text-red-500 text-sm">{errors.agreement}</span>}
 
-              {/* Submit Button */}
               <button
                 type="submit"
-                className="bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition"
+                className="bg-green-400 text-white p-3 rounded-md hover:bg-green-600 transition"
                 aria-label="Send message to Dr. Serena Blake"
               >
                 Send Message
               </button>
 
-              {/* Success Message */}
               {submitted && (
                 <p className="text-green-600 text-center mt-4">
                   ✅ Thank you! Dr. Serena Blake will contact you shortly.
