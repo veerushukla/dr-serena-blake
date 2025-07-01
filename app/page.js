@@ -27,7 +27,7 @@ export default function Home() {
           <Image width={40} height={40}
           src="/logo.png"
           alt="logo"
-          className="w-10 h-10 sm:w-16 sm:h-16 object-contain"
+          className="w-full h-auto object-cover sm:w-16 sm:h-16"
         />
         </a>
         <h1 className={`${robotoSlab.className} text-base sm:text-lg md:text-2xl font-medium leading-tight text-gray-600`}>
