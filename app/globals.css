@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Work+Sans:wght@400;600&display=swap');
 @import "tailwindcss";
+
 
 :root {
   --background: #ffffff;
@@ -22,10 +24,13 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Work Sans', 'Helvetica Neue', sans-serif;
 }
 html {
   scroll-behavior: smooth;
+}
+h1, h2, h3 {
+  font-family: 'Lora', serif;
 }
 
 .menu-icon {

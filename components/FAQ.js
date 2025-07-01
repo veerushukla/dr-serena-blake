@@ -32,6 +32,10 @@ const FAQ = () => {
     question: 'What is your cancellation policy?',
     answer: '24-hour notice required.'
   },
+  {
+    question: 'What are your office hours?',
+    answer: 'In-person: Tue & Thu, 10 AM—6 PM,  Virtual via Zoom: Mon, Wed & Fri, 1 PM—5 PM'
+  },
 ]
   return (
     <div id='FAQ' className='min-h-screen bg-violet-300 flex flex-col justify-center'>
