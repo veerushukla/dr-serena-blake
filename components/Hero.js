@@ -35,7 +35,7 @@ const Hero = () => {
         <Image width={1000} height={1000} src='/hero2.jpg' alt="background" className="absolute inset-0 w-full h-full brightness-70 object-cover min-h-[calc(100vh-7rem)]" />
       </div>
       <div className="absolute top-0 left-0 w-full h-full flex flex-col text-center justify-center items-center">
-        <h1 className="text-white text-2xl sm:text-4xl md:text-6xl font-bold drop-shadow-lg">
+        <h1 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold drop-shadow-lg">
           Your Story Matters. Your Healing Begins Here.
         </h1>
         <h2 className="mt-4 text-white text-xl sm:text-2xl font-light max-w-2xl drop-shadow-md brightness-95">
