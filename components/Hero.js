@@ -49,12 +49,12 @@ const Hero = () => {
         >
           Schedule Your Consultation
         </button>
-        <div className="count text-white mt-8 px-4 text-2xl sm:text-4xl font-bold max-w-2xl drop-shadow-md flex flex-row md:flex-row justify-between gap-8">
-          <ul className='flex flex-col items-start'>
+        <div className="count text-white mt-8 px-4 text-2xl sm:text-4xl font-bold max-w-2xl drop-shadow-md flex flex-col md:flex-row justify-between gap-8">
+          <ul className='flex flex-col items-center md:items-start'>
             <li>{count}+</li>
             <li>Years of practice</li>
           </ul>
-          <ul className='flex flex-col items-end'>
+          <ul className='flex flex-col items-center md:items-end'>
             <li>{count2}+</li>
             <li>Client Sessions</li>
           </ul>
