@@ -1,5 +1,5 @@
-'use client'
-import React from 'react'
+'use client';
+import React from 'react';
 import { Roboto_Slab } from 'next/font/google';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -18,63 +18,69 @@ const expertiseData = [
     title: 'Anxiety & Stress Management',
     image: '/stress.webp',
     description:
-      'Anxiety and stress can impact every part of your life, from relationships to daily routines. Through therapy, you’ll gain tools like mindfulness, grounding techniques, and cognitive strategies to manage overwhelming emotions, regulate your nervous system, and restore a sense of calm and control.',
+      'Anxiety and stress can impact every part of your life, from relationships to daily routines. Therapy provides you with tools like mindfulness, grounding techniques, and cognitive strategies to manage overwhelming emotions and restore calm.',
   },
   {
     title: 'Relationship Counseling',
     image: '/relation.jpg',
     description:
-      'Whether you\'re navigating conflict, communication struggles, or emotional distance, relationship counseling offers space to rebuild trust and connection. Therapy helps develop healthy patterns, deepen intimacy, and foster more meaningful, satisfying relationships—romantic or otherwise.',
+      'Whether navigating conflict or emotional distance, therapy helps you rebuild trust, strengthen communication, and deepen your connection—romantic or otherwise.',
   },
   {
     title: 'Trauma Recovery',
     image: '/trauma.jpg',
     description:
-      'Healing from trauma takes courage and support. Whether your trauma is recent or rooted in the past, therapy provides a safe environment to process painful memories, reduce triggers, and regain a sense of safety. Together, we work to rebuild strength, resilience, and emotional clarity.',
+      'Healing from trauma takes time, courage, and safety. In therapy, we create space to process your story, reduce triggers, and restore strength and emotional clarity.',
   },
 ];
 
 const Services = () => {
   return (
-    <div id="Services" className="min-h-screen bg-white shadow-lg flex flex-col items-center justify-center px-4 py-12">
-      <h2 className={`${robotoSlab.className} font-bold text-3xl md:text-4xl text-gray-800 mb-10`}>Core Expertise</h2>
+    <section
+      id="Services"
+      className="min-h-screen bg-white py-12 shadow-lg px-4 flex flex-col items-center justify-center"
+    >
+      <h2
+        className={`${robotoSlab.className} font-bold text-3xl md:text-4xl text-gray-800 mb-12 text-center`}
+      >
+        Core Expertise
+      </h2>
+
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={30}
+        spaceBetween={40}
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false
-        }}
-        loop= {true}
-        breakpoints={{
-          1024: {
-            slidesPerView: 1,
-          }
-        }}
-        className="max-w-6xl w-full"
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        loop={true}
+        className="w-full max-w-4xl"
       >
         {expertiseData.map((item, index) => (
-          <SwiperSlide key={index} className="flex items-center justify-center">
-            <div className="flex flex-col items-center justify-center mx-auto py-8 gap-y-4 w-72 lg:w-96">
-              <Image
-                width={400}
-                height={400}
-                src={item.image}
-                alt={item.title}
-                className="transition-transform duration-300 hover:scale-105 w-60 h-60 object-cover object-center rounded-full border-4 border-white shadow-md"
-              />
-              <span className={`${robotoSlab.className} text-xl`}>
+          <SwiperSlide key={index} className="flex justify-center">
+            <div className="flex flex-col items-center text-center gap-y-6 px-4">
+              <div className="w-56 h-56 md:w-64 md:h-64 relative rounded-full overflow-hidden shadow-md border-4 border-white">
+                <Image
+                  fill
+                  src={item.image}
+                  alt={item.title}
+                  className="object-cover object-center transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+
+              <h3
+                className={`${robotoSlab.className} text-xl md:text-2xl text-gray-800 font-semibold`}
+              >
                 {item.title}
-              </span>
-              <p className="text-center text-sm">{item.description}</p>
+              </h3>
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed max-w-lg">
+                {item.description}
+              </p>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   );
 };
 
