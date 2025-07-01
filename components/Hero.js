@@ -23,11 +23,11 @@ const Hero = () => {
 
     const interval = setInterval(() => {
       setcount2((prev) => prev + 1);
-    },1)
+    }, 1)
 
     return () => clearInterval(interval)
   }, [count2])
-  
+
 
   return (
     <div id="Hero" className="min-h-screen  bg-blue-300 relative py-12">
@@ -41,7 +41,12 @@ const Hero = () => {
         <h2 className="mt-4 text-white text-xl sm:text-2xl font-light max-w-2xl drop-shadow-md brightness-95">
           Dr. Serena Blake, PsyD — Licensed Clinical Psychologist in Los Angeles, CA
         </h2>
-        <button className="mt-8 px-6 py-3 text-lg bg-white text-blue-700 font-semibold rounded-full shadow-md hover:bg-blue-100 transition">
+        <button
+          onClick={() => {
+            document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="mt-8 px-6 py-3 text-lg bg-white text-blue-700 font-semibold rounded-full opacity-75 shadow-md hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+        >
           Schedule Your Consultation
         </button>
         <div className="count text-white mt-8 px-4 text-2xl sm:text-4xl font-bold max-w-2xl drop-shadow-md flex flex-row justify-between gap-8">
