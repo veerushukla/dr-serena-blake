@@ -203,7 +203,7 @@ const Contact = () => {
                 </div>
               ))}
 
-              <label htmlFor="agreement" className="flex items-start gap-2 text-sm">
+              <label htmlFor="agreement" className="flex items-center gap-2 text-sm">
                 <input
                   type="checkbox"
                   id="agreement"
@@ -211,13 +211,14 @@ const Contact = () => {
                   checked={formData.agreement}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className="h-5 w-5 text-blue-600 rounded mt-1"
+                  className="h-4 w-4 text-blue-600 rounded"
                   required
                 />
-                <span className={`${errors.agreement ? "text-red-500" : "text-gray-700"}`}>
+                <span className={errors.agreement ? "text-red-500" : "text-gray-700"}>
                   I agree to the terms and conditions
                 </span>
               </label>
+
               {errors.agreement && <span className="text-red-500 text-sm">{errors.agreement}</span>}
 
               <button
