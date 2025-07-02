@@ -13,7 +13,7 @@ const About = () => {
     <div id="About" className="min-h-screen bg-[#f3f4f6] flex items-center justify-center px-4 py-12">
       <div className="max-w-6xl w-full flex flex-col sm:flex-row items-center gap-8">
         <div className="w-full sm:w-1/2 flex justify-center">
-          <Image width={400} height={400} src="/drserena.png" alt="Dr. Serena Blake" className="w-full border-2 border-black max-w-xs sm:max-w-sm h-auto object-cover rounded-2xl shadow-md"/>
+          <Image width={400} height={400} src="/drserena.png" alt="Dr. Serena Blake" className="w-full border-2 border-black max-w-xs sm:max-w-sm h-auto  object-cover rounded-2xl shadow-md"/>
         </div>
 
         {/* About Text */}

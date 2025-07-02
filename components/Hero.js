@@ -2,6 +2,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
 import { Roboto_Slab } from 'next/font/google';
 
@@ -13,6 +14,7 @@ const robotoSlab = Roboto_Slab({
 const Hero = () => {
   const [count, setCount] = useState(1);
   const [count2, setcount2] = useState(1)
+  const count2Ref = useRef(count2)
 
   useEffect(() => {
     if (count >= 8) return;
@@ -25,14 +27,20 @@ const Hero = () => {
   }, [count]);
 
   useEffect(() => {
-    if (count2 >= 500) return;
+    count2Ref.current = count2;
+  }, [count2]);
 
+  useEffect(() => {
     const interval = setInterval(() => {
+      if (count2Ref.current >= 500) {
+        clearInterval(interval);
+        return;
+      }
       setcount2((prev) => prev + 1);
-    }, 1)
+    }, 1);
 
-    return () => clearInterval(interval)
-  }, [count2])
+    return () => clearInterval(interval);
+  }, []);
 
 
   return (
