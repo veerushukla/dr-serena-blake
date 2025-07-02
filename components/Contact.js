@@ -32,7 +32,7 @@ const Contact = () => {
       case "name":
         return value.trim() ? "" : "Name is required.";
       case "phone":
-        return value.trim() ? "" : "Phone is required.";
+        return /^[0-9]{7,15}$/.test(value.trim()) ? "" : "Enter a valid phone number.";
       case "email":
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
           ? ""
@@ -58,7 +58,7 @@ const Contact = () => {
 
     setFormData((prev) => ({ ...prev, [name]: fieldValue }));
 
-    if (name === "email") {
+    if (name === "email" || name === "phone") {
       setErrors((prev) => ({
         ...prev,
         [name]: validateField(name, fieldValue),
@@ -90,21 +90,29 @@ const Contact = () => {
     const newErrors = validateAll();
     setErrors(newErrors);
 
+    // Blur any focused element (close keyboard on mobile)
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
     if (Object.keys(newErrors).length === 0) {
       setSubmitted(true);
       setFormData(initialForm);
       formRef.current?.reset();
-      toast.success("Your message has been sent!", { icon: "📬" });
+
+      toast.success("Your message has been sent!", {
+        icon: "📬",
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+      });
     } else {
       setSubmitted(false);
-      toast.error("Please fix the errors in the form.", { icon: "⚠️" });
+      toast.error("Failed to send.", {
+        icon: "⚠️",
+        pauseOnHover: false,
+        pauseOnFocusLoss: false,
+      });
 
-      const firstErrorKey = Object.keys(newErrors)[0];
-      const errorElement = document.getElementById(firstErrorKey);
-      if (errorElement) {
-        errorElement.scrollIntoView({ behavior: "smooth", block: "center" });
-        errorElement.focus();
-      }
     }
   };
 
@@ -143,6 +151,8 @@ const Contact = () => {
                     id={name}
                     name={name}
                     type={name === "email" ? "email" : name === "phone" ? "tel" : "text"}
+                    inputMode={name === "phone" ? "numeric" : undefined}
+                    pattern={name === "phone" ? "[0-9]*" : undefined}
                     autoComplete={name}
                     placeholder={`Your ${label}`}
                     value={formData[name]}
@@ -233,12 +243,14 @@ const Contact = () => {
         </div>
 
         <ToastContainer
-          position="top-right"
+          position="top-center"
           autoClose={3000}
           theme="light"
           toastClassName="!rounded-xl !shadow-lg !text-sm !text-gray-700 !bg-white border border-emerald-200"
           bodyClassName="!p-4"
           closeButton={false}
+          draggable={false}
+          newestOnTop
         />
       </div>
     </>
