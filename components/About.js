@@ -18,8 +18,8 @@ const About = () => {
 
         {/* About Text */}
         <div className="w-full sm:w-1/2 text-center sm:text-left">
-          <h2 className={`${robotoSlab.className} font-bold text-3xl sm:text-4xl text-gray-800 mb-4`}>About Dr. Serena Blake</h2>
-          <p className="text-gray-700 leading-relaxed text-xl md:text-2xl pt-2">
+          <h2 className={`${robotoSlab.className} font-bold text-3xl sm:text-4xl text-gray-700 mb-4`}>About Dr. Serena Blake</h2>
+          <p className="text-gray-600 leading-relaxed text-lg md:text-xl pt-2">
             I am Dr. Serena Blake, a licensed clinical psychologist (PsyD) based in Los Angeles, CA, with over eight years of experience and more than 500 client sessions. I specialize in helping people manage anxiety and stress, strengthen their relationships, and recover from trauma. My approach combines evidence-based methods—like cognitive-behavioral therapy and mindfulness—with a warm, compassionate style tailored to each individual. Whether we meet in my Maplewood Drive office or connect virtually via Zoom, my goal is to create a safe, supportive space where you can feel understood, empowered, and ready to grow.
           </p>
         </div>
