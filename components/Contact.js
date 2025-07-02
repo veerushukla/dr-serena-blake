@@ -58,7 +58,6 @@ const Contact = () => {
 
     setFormData((prev) => ({ ...prev, [name]: fieldValue }));
 
-    // Validate as user types (optional for some fields)
     if (name === "email") {
       setErrors((prev) => ({
         ...prev,
@@ -119,14 +118,14 @@ const Contact = () => {
         />
       </Head>
 
-      <div id="Contact" className="min-h-screen flex flex-col items-center bg-emerald-100 py-12">
-        <h2 className={`${robotoSlab.className} font-bold text-3xl md:text-4xl text-gray-800 mb-10 text-center px-4`}>
+      <div id="Contact" className="min-h-screen flex flex-col items-center bg-emerald-100 py-12 px-4 sm:px-6">
+        <h2 className={`${robotoSlab.className} font-bold text-3xl md:text-4xl text-gray-800 mb-10 text-center`}>
           Contact Dr. Serena Blake
         </h2>
 
-        <div className="cards flex lg:flex-row flex-col justify-center items-center gap-8 px-4">
-          <div className="contact-form bg-white shadow-md rounded-lg p-4 w-full max-w-md order-1 lg:order-2">
-            <p className="text-sm md:text-lg text-gray-700 mb-6 text-center px-8">
+        <div className="flex lg:flex-row flex-col justify-center items-center gap-8 w-full">
+          <div className="bg-white shadow-md rounded-lg p-4 sm:p-6 w-full max-w-md order-1 lg:order-2">
+            <p className="text-sm md:text-lg text-gray-700 mb-6 text-center">
               Simply fill the brief fields below and Dr. Serena Blake will be in touch with you soon.
               This form is safe, private, and completely free.
             </p>
@@ -134,12 +133,12 @@ const Contact = () => {
             <form
               ref={formRef}
               onSubmit={handleSubmit}
-              className="max-w-md mx-auto flex flex-col gap-y-4 md:px-8 px-2"
+              className="w-full flex flex-col gap-y-4"
               noValidate
             >
               {[["Name", "name"], ["Phone", "phone"], ["Email", "email"]].map(([label, name]) => (
                 <div key={name} className="w-full flex flex-col gap-1">
-                  <label htmlFor={name}>{label}</label>
+                  <label htmlFor={name} className="text-sm font-medium mb-1">{label}</label>
                   <input
                     id={name}
                     name={name}
@@ -150,7 +149,7 @@ const Contact = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     aria-invalid={!!errors[name]}
-                    className={`p-3 border ${errors[name] ? "border-red-500" : "border-gray-300"} rounded-md`}
+                    className={`p-3 text-sm border ${errors[name] ? "border-red-500" : "border-gray-300"} rounded-md`}
                     required
                   />
                   {errors[name] && <span className="text-red-500 text-sm">{errors[name]}</span>}
@@ -158,8 +157,8 @@ const Contact = () => {
               ))}
 
               <div className="w-full flex flex-col gap-1">
-                <label htmlFor="preferredDate">Preferred Date and Time</label>
-                <div className="flex flex-col md:flex-row gap-2">
+                <label htmlFor="preferredDate" className="text-sm font-medium mb-1">Preferred Date and Time</label>
+                <div className="flex flex-col sm:flex-row gap-2">
                   <input
                     id="preferredDate"
                     name="preferredDate"
@@ -167,7 +166,7 @@ const Contact = () => {
                     value={formData.preferredDate}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full p-3 border ${errors.preferredDate ? "border-red-500" : "border-gray-300"} rounded-md`}
+                    className={`w-full p-3 text-sm border ${errors.preferredDate ? "border-red-500" : "border-gray-300"} rounded-md`}
                     required
                   />
                   <input
@@ -177,7 +176,7 @@ const Contact = () => {
                     value={formData.preferredTime}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`w-full p-3 border ${errors.preferredTime ? "border-red-500" : "border-gray-300"} rounded-md`}
+                    className={`w-full p-3 text-sm border ${errors.preferredTime ? "border-red-500" : "border-gray-300"} rounded-md`}
                     required
                   />
                 </div>
@@ -185,37 +184,26 @@ const Contact = () => {
                 {errors.preferredTime && <span className="text-red-500 text-sm">{errors.preferredTime}</span>}
               </div>
 
-              <div className="w-full flex flex-col gap-1">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Your Message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={`p-3 border ${errors.message ? "border-red-500" : "border-gray-300"} rounded-md h-20`}
-                  required
-                />
-                {errors.message && <span className="text-red-500 text-sm">{errors.message}</span>}
-              </div>
+              {["message", "referral"].map((field) => (
+                <div key={field} className="w-full flex flex-col gap-1">
+                  <label htmlFor={field} className="text-sm font-medium mb-1">
+                    {field === "referral" ? "Where did you find us?" : "Message"}
+                  </label>
+                  <textarea
+                    id={field}
+                    name={field}
+                    placeholder={field === "referral" ? "What brings you here?" : "Your Message"}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={`p-3 text-sm border ${errors[field] ? "border-red-500" : "border-gray-300"} rounded-md h-20`}
+                    required
+                  />
+                  {errors[field] && <span className="text-red-500 text-sm">{errors[field]}</span>}
+                </div>
+              ))}
 
-              <div className="w-full flex flex-col gap-1">
-                <label htmlFor="referral">Where did you find us?</label>
-                <textarea
-                  id="referral"
-                  name="referral"
-                  placeholder="What brings you here?"
-                  value={formData.referral}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={`p-3 border ${errors.referral ? "border-red-500" : "border-gray-300"} rounded-md h-20`}
-                  required
-                />
-                {errors.referral && <span className="text-red-500 text-sm">{errors.referral}</span>}
-              </div>
-
-              <label htmlFor="agreement" className="flex items-start gap-2">
+              <label htmlFor="agreement" className="flex items-start gap-2 text-sm">
                 <input
                   type="checkbox"
                   id="agreement"
@@ -234,7 +222,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="bg-green-400 text-white p-3 rounded-md hover:bg-green-600 transition"
+                className="bg-green-400 text-white p-3 rounded-md hover:bg-green-600 transition w-full sm:w-auto"
                 aria-label="Send message to Dr. Serena Blake"
               >
                 Send Message
