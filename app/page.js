@@ -25,10 +25,10 @@ export default function Home() {
       <div className="heading flex items-center gap-4 pt-4 sm:pt-8 px-4 sm:px-8 fade-in max-w-screen-xl mx-auto">
         <a href="#Hero">
           <Image width={40} height={40}
-          src="/logo.png"
-          alt="logo"
-          className="w-full h-auto object-cover sm:w-16 sm:h-16"
-        />
+            src="/logo.png"
+            alt="logo"
+            className="w-full h-auto object-cover sm:w-16 sm:h-16"
+          />
         </a>
         <h1 className={`${robotoSlab.className} text-base sm:text-lg md:text-2xl font-medium leading-tight text-gray-600`}>
           <a href="#Hero">Dr. Serena Blake,<br className="hidden sm:block" /> PsyD (Clinical Psychologist)</a>
@@ -66,6 +66,14 @@ export default function Home() {
             <li>In-person: Tue & Thu, 10 AM—6 PM</li>
             <li>Virtual via Zoom: Mon, Wed & Fri, 1 PM—5 PM</li>
           </ul>
+          <button
+            onClick={() => {
+              document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className="mt-12 px-6 py-3 text-lg bg-blue-300 text-gray-700 font-semibold rounded-full shadow-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+          >
+            Schedule Your Consultation
+          </button>
         </div>
 
         <div className="h-0.5 w-3/4 md:w-1/2 bg-black mx-auto fade-in mb-10"></div>
@@ -73,7 +81,7 @@ export default function Home() {
         <div className="fade-in max-w-screen-xl mx-auto px-4 sm:px-8"><FAQ /></div>
 
         <div className="thaughts flex flex-col justify-center items-center py-16 sm:py-20 fade-in px-4">
-          <Image width={700} height={700} src="/hero1.jpg" alt="hero" className="relative object-cover opacity-50"/>
+          <Image width={700} height={700} src="/hero1.jpg" alt="hero" className="relative object-cover opacity-65" />
           <h1 className="text-2xl absolute sm:text-4xl px-10 md:px-0 brightness-50 md:text-5xl lg:text-6xl drop-shadow-md text-center max-w-5xl">
             “Our sessions aren&apos;t about fixing you — they&apos;re about helping you reconnect with parts of yourself that may have been silenced or hidden.”
           </h1>

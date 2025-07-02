@@ -59,7 +59,7 @@ const Hero = () => {
           onClick={() => {
             document.getElementById('Contact')?.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="mt-12 px-6 py-3 text-lg bg-white text-blue-700 font-semibold rounded-full opacity-75 shadow-md hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+          className="mt-12 px-6 py-3 text-lg bg-blue-300 text-gray-700 font-semibold rounded-full shadow-md hover:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
         >
           Schedule Your Consultation
         </button>
