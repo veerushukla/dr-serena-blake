@@ -94,10 +94,10 @@ const Contact = () => {
       setSubmitted(true);
       setFormData(initialForm);
       formRef.current?.reset();
-      toast.success("✅ Your message has been sent!", { icon: "📬" });
+      toast.success("Your message has been sent!", { icon: "📬" });
     } else {
       setSubmitted(false);
-      toast.error("❌ Please fix the errors in the form.", { icon: "⚠️" });
+      toast.error("Please fix the errors in the form.", { icon: "⚠️" });
 
       const firstErrorKey = Object.keys(newErrors)[0];
       const errorElement = document.getElementById(firstErrorKey);
